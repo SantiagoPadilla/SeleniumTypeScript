@@ -2,32 +2,39 @@ import {
     Before,
     After
 } from "@cucumber/cucumber"
-import { Builder } from 'selenium-webdriver'
+
 import * as fs from "fs"
+import { ScenarioWorld } from "./world"
 
 
 Before(
-    async function() {
-        const driver = new Builder().forBrowser("chrome").build()
-        await driver.manage().window().maximize()
+    
+    async function(this: ScenarioWorld, scenario) {
 
-        global.gdriver = driver
+        const ready = await this.init()
+        return ready
+
     }
 )
 
 After(
-    async function(scenario) {
+    async function(this: ScenarioWorld, scenario) {
+        const {
+            screen: { driver }
+        } = this
 
         const scenarioStatus = scenario.result?.status
 
         if (scenarioStatus === 'FAILED') {
-            global.gdriver.takeScreenshot().then(
+
+            driver.takeScreenshot().then(
                 (image) => {
                     fs.writeFileSync(`./reports/screenshots/${scenario.pickle.name}.png`, image, 'base64')
                 }
             )
+
         }
 
-        await global.gdriver.quit()
+        await driver.quit()
     }
 )

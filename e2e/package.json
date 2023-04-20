@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/selenium-webdriver": "^4.1.13",
     "@cucumber/cucumber": "^9.1.0",
     "chai": "^4.3.7",
     "chromedriver": "^112.0.0",
+    "geckodriver": "^3.2.0",
     "selenium-webdriver": "^4.8.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
