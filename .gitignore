@@ -1,2 +1,5 @@
 node_modules
 package-lock.json
+yarn.lock
+e2e/dist/*
+e2e/reports/*
