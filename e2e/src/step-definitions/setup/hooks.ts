@@ -4,6 +4,7 @@ import {
 } from "@cucumber/cucumber"
 
 import * as fs from "fs"
+import { env } from '../../env/parseEnv'
 import { ScenarioWorld } from "./world"
 
 
@@ -29,7 +30,7 @@ After(
 
             driver.takeScreenshot().then(
                 (image) => {
-                    fs.writeFileSync(`./reports/screenshots/${scenario.pickle.name}.png`, image, 'base64')
+                    fs.writeFileSync(`${env('SCREENSHOT_PATH')}${scenario.pickle.name}.png`, image, 'base64')
                 }
             )
 
